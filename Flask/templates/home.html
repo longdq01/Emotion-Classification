@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href=" {{ url_for('logout') }}">Logout</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+    <div id="info">
+        <form action="">
+            <div>
+                <div><label for="device">Chọn thiết bị</label></div>
+
+                <select name="device" id="device">
+                    <option value="" disabled selected>Chọn Camera</option>
+                    <option value="1">Thiết bị 1</option>
+                    <option value="2">Thiết bị 2</option>
+                    <option value="3">Thiết bị 3</option>
+                    <option value="4">Thiết bị 4</option>
+                    <option value="5">Thiết bị 5</option>
+                </select>
+            </div>
+
+            <div>
+                <div><label for="shift">Chọn kíp</label></div>
+
+                <select name="shift" id="shift">
+                    <option value="" disabled selected>Chọn Kíp</option>
+                    <option value="1">Kíp 1</option>
+                    <option value="2">Kíp 2</option>
+                    <option value="3">Kíp 3</option>
+                    <option value="4">Kíp 4</option>
+                    <option value="5">Kíp 5</option>
+                    <option value="6">Kíp 6</option>
+                </select>
+            </div>
+        </form>
+
+        <div>
+            <div id="left_div">
+                <!-- biểu đồ trái-->
+            </div>
+
+            <div id="right_div">
+                <!-- biểu đồ phải -->
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="bar">
+        <div>Cảm xúc 1</div>
+        <div>Cảm xúc 2</div>
+        <div>Cảm xúc 3</div>
+        <div>Cảm xúc 4</div>
+        <div>Cảm xúc 5</div>
+        <div>Cảm xúc 6</div>
+        <div>Cảm xúc 7</div>
+    </div>
+
+    <div id="image">
+        <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
+        <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
+        <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
+        <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
+        <div><img src="static/image/239994219_562700661810872_2758031682051015953_n.png" alt="img"></div>
+        <div><img src="static/image/240477771_146926404256279_3702667315690472933_n.png" alt="img"></div>
+        <div><img src="static/image/234621013_3046490332246806_5939527391654931638_n.png" alt="img"></div>
+        <div><img src="static/image/237608264_238500998169287_8860165350650652027_n.png" alt="img"></div>
+        <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
+        <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
+        <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
+        <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
+    </div>
+
+</body>
+
+</html>
