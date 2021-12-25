@@ -2,17 +2,23 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+    crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="../static/js/devicewkip.js"></script>
+
 </head>
 
 <body>
@@ -35,72 +41,97 @@
     </div>
   </nav>
 
-    <div id="info">
-        <form action="">
-            <div>
-                <div><label for="device">Chọn thiết bị</label></div>
+  <div id="info">
+    <form action="">
+      <div>
+        <div><label for="device">Chọn thiết bị</label></div>
 
-                <select name="device" id="device">
-                    <option value="" disabled selected>Chọn Camera</option>
-                    <option value="1">Thiết bị 1</option>
-                    <option value="2">Thiết bị 2</option>
-                    <option value="3">Thiết bị 3</option>
-                    <option value="4">Thiết bị 4</option>
-                    <option value="5">Thiết bị 5</option>
-                </select>
-            </div>
+        <select name="device" id="device">
+          <option value="" disabled selected>Chọn Camera</option>
+          <option value="1">Thiết bị 1</option>
+          <option value="2">Thiết bị 2</option>
+          <option value="3">Thiết bị 3</option>
+          <option value="4">Thiết bị 4</option>
+          <option value="5">Thiết bị 5</option>
+        </select>
+      </div>
 
-            <div>
-                <div><label for="shift">Chọn kíp</label></div>
+      <div>
+        <div><label for="shift">Chọn kíp</label></div>
 
-                <select name="shift" id="shift">
-                    <option value="" disabled selected>Chọn Kíp</option>
-                    <option value="1">Kíp 1</option>
-                    <option value="2">Kíp 2</option>
-                    <option value="3">Kíp 3</option>
-                    <option value="4">Kíp 4</option>
-                    <option value="5">Kíp 5</option>
-                    <option value="6">Kíp 6</option>
-                </select>
-            </div>
-        </form>
+        <select name="shift" id="shift">
+          <option value="" disabled selected>Chọn Kíp</option>
+          <option value="1">Kíp 1</option>
+          <option value="2">Kíp 2</option>
+          <option value="3">Kíp 3</option>
+          <option value="4">Kíp 4</option>
+          <option value="5">Kíp 5</option>
+          <option value="6">Kíp 6</option>
+        </select>
+      </div>
+    </form>
+    <!-- nút set trạng thái và lọc trường hợp -->
+    <button id="setstt">Set lại trạng thái</button>
+    <button id="loc">Lọc</button>
 
-        <div>
-            <div id="left_div">
-                <!-- biểu đồ trái-->
-            </div>
+    <div>
+      <div id="left_div">
+        <!-- biểu đồ trái-->
+        <h1 style="font-size:120%">Biểu đồ cảm xúc</h1>
+        <p id="informleft">Thiết bị - kíp </p>
+      </div>
 
-            <div id="right_div">
-                <!-- biểu đồ phải -->
-                
-            </div>
-        </div>
+      <div id="right_div">
+        <!-- biểu đồ phải -->
+        <h1 style="font-size:120%">Sử dụng thiết bị</h1>
+        <p id="informright">Thiết bị - kíp</p>
+
+        <table style="width:100%">
+          <tr>
+            <th>Note</th>
+            <th>Số lượng</th>
+          </tr>
+          <tr>
+            <td>sử dụng điện thoại</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>sử dụng máy tính</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td>khác</td>
+            <td>10</td>
+          </tr>
+        </table>
+      </div>
     </div>
+  </div>
 
-    <div id="bar">
-        <div>Cảm xúc 1</div>
-        <div>Cảm xúc 2</div>
-        <div>Cảm xúc 3</div>
-        <div>Cảm xúc 4</div>
-        <div>Cảm xúc 5</div>
-        <div>Cảm xúc 6</div>
-        <div>Cảm xúc 7</div>
-    </div>
+  <div id="bar">
+    <div>Cảm xúc 1</div>
+    <div>Cảm xúc 2</div>
+    <div>Cảm xúc 3</div>
+    <div>Cảm xúc 4</div>
+    <div>Cảm xúc 5</div>
+    <div>Cảm xúc 6</div>
+    <div>Cảm xúc 7</div>
+  </div>
 
-    <div id="image">
-        <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
-        <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
-        <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
-        <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
-        <div><img src="static/image/239994219_562700661810872_2758031682051015953_n.png" alt="img"></div>
-        <div><img src="static/image/240477771_146926404256279_3702667315690472933_n.png" alt="img"></div>
-        <div><img src="static/image/234621013_3046490332246806_5939527391654931638_n.png" alt="img"></div>
-        <div><img src="static/image/237608264_238500998169287_8860165350650652027_n.png" alt="img"></div>
-        <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
-        <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
-        <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
-        <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
-    </div>
+  <div id="image">
+    <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
+    <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
+    <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
+    <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
+    <div><img src="static/image/239994219_562700661810872_2758031682051015953_n.png" alt="img"></div>
+    <div><img src="static/image/240477771_146926404256279_3702667315690472933_n.png" alt="img"></div>
+    <div><img src="static/image/234621013_3046490332246806_5939527391654931638_n.png" alt="img"></div>
+    <div><img src="static/image/237608264_238500998169287_8860165350650652027_n.png" alt="img"></div>
+    <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
+    <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
+    <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
+    <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
+  </div>
 
 </body>
 

@@ -15,8 +15,8 @@
 <body>
     <section>
         <div class="img-bg">
-            <img src="static/image/beach-seascape-sunset-sea-beautiful-more-pliazh-zakat.jpg"" alt="background">
-        </div>  
+            <img src="static/image/beach-seascape-sunset-sea-beautiful-more-pliazh-zakat.jpg"" alt=" background">
+        </div>
         <div class="noi-dung">
             <div class="form">
                 <h2>Trang Đăng Nhập</h2>
@@ -29,6 +29,16 @@
                         <label for="pwd">Mật Khẩu</label>
                         <input type="password" name="pass" placeholder="Password" id='pwd'>
                     </div>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    <div class=flashes>
+                        {% for message in messages %}
+                        <p>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% endwith %}
+
                     <div class="input-form">
                         <input type="submit" value="Đăng Nhập">
                     </div>

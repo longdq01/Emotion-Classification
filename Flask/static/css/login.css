@@ -119,3 +119,8 @@ section .noi-dung .form .input-form p a{
       font-weight: 500;
   }
 }
+
+div.flashes{
+    color:rgb(200, 30, 30);
+    
+}
