@@ -14,7 +14,7 @@ body{
 }
 
 form > div{
-    width: 40%;
+    width: 25%;
 }
 
 #info > div {
@@ -28,7 +28,10 @@ select {
     padding: 8px 24px 8px 24px;
     border:2px #E5E5E5 solid;
     border-radius: 8px;
+    
 }
+
+
 
 label {
     line-height:34px;
@@ -87,4 +90,17 @@ label {
 
 #image div img{
     width: 100%;
+}
+
+table, th, td { /* */
+    background: #FFFFFF;
+    border: 1px solid #E4E4E7;
+    box-sizing: border-box;
+    box-shadow: inset 0px -1px 0px #E4E4E7;
+    border-radius: 8px 8px 0px 0px;
+    padding: 10px;
+
+}
+th {
+    text-align: center;
 }

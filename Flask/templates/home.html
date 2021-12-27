@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Trang chủ</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,10 +33,10 @@
             <a class="nav-link" href=" {{ url_for('logout') }}">Logout</a>
           </li>
         </ul>
-        <form class="d-flex">
+        <!-- <form class="d-flex">
           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+        </form> -->
       </div>
     </div>
   </nav>
@@ -44,35 +44,40 @@
   <div id="info">
     <form action="">
       <div>
-        <div><label for="device">Chọn thiết bị</label></div>
+        <div><label for="device"><b>Chọn thiết bị</b></label></div>
 
-        <select name="device" id="device">
-          <option value="" disabled selected>Chọn Camera</option>
-          <option value="1">Thiết bị 1</option>
-          <option value="2">Thiết bị 2</option>
-          <option value="3">Thiết bị 3</option>
-          <option value="4">Thiết bị 4</option>
-          <option value="5">Thiết bị 5</option>
+        <select name="device" class="input-field" id="device">
+          {% for cam in listCamera %}
+          <option value="{{cam[0]}}">{{cam[1]}}</option>
+          {% endfor %}
         </select>
       </div>
 
       <div>
-        <div><label for="shift">Chọn kíp</label></div>
-
-        <select name="shift" id="shift">
-          <option value="" disabled selected>Chọn Kíp</option>
+        <div><label for="shift"><b>Chọn kíp</b></label></div>
+        <select name="shift" class="input-field" id="shift">
           <option value="1">Kíp 1</option>
           <option value="2">Kíp 2</option>
           <option value="3">Kíp 3</option>
           <option value="4">Kíp 4</option>
           <option value="5">Kíp 5</option>
           <option value="6">Kíp 6</option>
+          <option value="7">Kíp 7</option>
+          <option value="8">Kíp 8</option>
+          <option value="9">Kíp 9</option>
         </select>
+      </div>
+
+      <div>
+        <div><label for="start"><b>Chọn ngày</b></label></div>
+
+        <input type="date" id="start" name="trip-start" class="input-field">
+
       </div>
     </form>
     <!-- nút set trạng thái và lọc trường hợp -->
     <button id="setstt">Set lại trạng thái</button>
-    <button id="loc">Lọc</button>
+    <!-- <button id="loc">Lọc</button> -->
 
     <div>
       <div id="left_div">
@@ -93,15 +98,15 @@
           </tr>
           <tr>
             <td>sử dụng điện thoại</td>
-            <td>10</td>
+            <td>{{infor_class['useSmartPhone']}}</td>
           </tr>
           <tr>
             <td>sử dụng máy tính</td>
-            <td>10</td>
+            <td>{{infor_class['useLaptop']}}</td>
           </tr>
           <tr>
             <td>khác</td>
-            <td>10</td>
+            <td>{{infor_class['other']}}</td>
           </tr>
         </table>
       </div>
@@ -109,28 +114,19 @@
   </div>
 
   <div id="bar">
-    <div>Cảm xúc 1</div>
-    <div>Cảm xúc 2</div>
-    <div>Cảm xúc 3</div>
-    <div>Cảm xúc 4</div>
-    <div>Cảm xúc 5</div>
-    <div>Cảm xúc 6</div>
-    <div>Cảm xúc 7</div>
+    <div class="emotion selected" style="border-bottom:2px solid #2ecc71" id="e1">Cảm xúc 1</div>
+    <div class="emotion" id="e2">Cảm xúc 2</div>
+    <div class="emotion" id="e3">Cảm xúc 3</div>
+    <div class="emotion" id="e4">Cảm xúc 4</div>
+    <div class="emotion" id="e5">Cảm xúc 5</div>
+    <div class="emotion" id="e6">Cảm xúc 6</div>
+    <div class="emotion" id="e7">Cảm xúc 7</div>
   </div>
 
   <div id="image">
-    <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
-    <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
-    <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
-    <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
-    <div><img src="static/image/239994219_562700661810872_2758031682051015953_n.png" alt="img"></div>
-    <div><img src="static/image/240477771_146926404256279_3702667315690472933_n.png" alt="img"></div>
-    <div><img src="static/image/234621013_3046490332246806_5939527391654931638_n.png" alt="img"></div>
-    <div><img src="static/image/237608264_238500998169287_8860165350650652027_n.png" alt="img"></div>
-    <div><img src="static/image/240504267_370986424491389_7174435933775401271_n.png" alt="img"></div>
-    <div><img src="static/image/240472777_569051267626884_8284405624185554244_n.png" alt="img"></div>
-    <div><img src="static/image/240468246_562260208236999_3290857199140905863_n.png" alt="img"></div>
-    <div><img src="static/image/238199833_597108194993273_3477630183866901196_n.png" alt="img"></div>
+    {% for image in listImage %}
+    <div><img src="https://i.ytimg.com/vi/tVlcKp3bWH8/maxresdefault.jpg" alt="img"></div>
+    {% endfor %}
   </div>
 
 </body>

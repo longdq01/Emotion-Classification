@@ -2,34 +2,43 @@
 $(document).ready(function () {
     var name = undefined;
     var kip = undefined;
-    $("#device").change(function () {
-        name = $("#device option:selected").val();
-        alert("Bạn đang chọn thiết bị " + name);
-        if (kip != undefined) {
-            const template = `Thiết bị ${name} - Kíp ${kip}`;
-            $("#informleft").html(template);
-            $("#informright").html(template);
-        }
-        else {
-            const template = `Thiết bị ${name}`;
-            $("#informleft").html(template);
-            $("#informright").html(template);
-        }
-    });
 
-    $("#shift").change(function () {
-        kip = $("#shift option:selected").val();
-        alert("Bạn đang chọn kíp " + kip);
-        if (name != undefined) {
-            const template = `Thiết bị ${name} - Kíp ${kip}`;
-            $("#informleft").html(template);
-            $("#informright").html(template);
-        }
-        else {
-            const template = `Kip ${kip}`;
-            $("#informleft").html(template);
-            $("#informright").html(template);
-        }
+    $(".input-field").change(function () {
+        cam_id = $("#device :selected").val();
+        shift = $("#shift :selected").val();
+        date = $("#start").val();
+        emotion = $(".selected").attr("id");
+
+        console.log(date, cam_id, shift, emotion)
+        data = {}
+        data['cameraId'] = cam_id;
+        data['shift'] = shift;
+        data['date'] = date;
+        data['emotion'] = emotion;
+
+        $.ajax({
+            url: '/info',
+            contentType: "application/json;charset=utf-8",
+            dataType: 'json',
+            type: "POST",
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response);
+                var image = response['image'];
+                $("#image").empty();
+                for (img in image) {
+
+                    let src = 'https://image.shutterstock.com/image-photo/close-portrait-smiling-handsome-man-260nw-1011569245.jpg'
+                    //let ele = `<div><img src = '${image[img]}' /></div>alt="img"></div>`;
+                    let ele = `<div><img src = '${src}' /></div>`;
+                    $('#image').append(ele);
+                }
+            },
+            error: function (error) {
+                $("#wait-load").modal("hide");
+                console.log(error);
+            }
+        });
     });
 
     $("#setstt").click(function () {
@@ -37,4 +46,31 @@ $(document).ready(function () {
         $("#informleft").html("Thiết bị - kíp");
         $("#informright").html("Thiết bị - kíp");
     });
+
+    var now = new Date();
+    var month = (now.getMonth() + 1);
+    var day = now.getDate();
+    if (month < 10)
+        month = "0" + month;
+    if (day < 10)
+        day = "0" + day;
+    var today = now.getFullYear() + '-' + month + '-' + day;
+    $('#start').val(today);
+
+    $('#start').change(function () {
+        var date = $(this).val();
+        console.log(date, 'change')
+    });
+
+    $("#bar .emotion").click(function () {
+
+        $("#bar .emotion").each(function () {
+            $(this).removeClass("selected");
+            $(this).css('border-bottom', 'none')
+        });
+        $(this).addClass("selected");
+        $(this).css('border-bottom', '2px solid #2ecc71')
+    });
+
 });
+
