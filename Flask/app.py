@@ -62,6 +62,8 @@ def home():
         for obj in listEmotion:
             label.append(obj[0])
             data.append(obj[1])
+
+        print(label, data)
         # get list image of first emotion
         query = "SELECT image FROM dbo.Emotion where"
         query += " LoaiCamXuc={} and ThietBi= {} and CONVERT(DATE,Ngay)='{}' and Kip={}".format(

@@ -75,38 +75,101 @@
 
       </div>
     </form>
-    <!-- nút set trạng thái và lọc trường hợp -->
-    <button id="setstt">Set lại trạng thái</button>
-    <!-- <button id="loc">Lọc</button> -->
+
+    <!-- <button id="setstt">Set lại trạng thái</button> -->
+
 
     <div>
       <div id="left_div">
         <!-- biểu đồ trái-->
-        <h1 style="font-size:120%">Biểu đồ cảm xúc</h1>
-        <p id="informleft">Thiết bị - kíp </p>
+        <h1 style="font-size:130%;margin-left: 10px; margin-top: 10px">Biểu đồ cảm xúc</h1>
+
+        <canvas id="chart" max-width="600px" max-height="300px"></canvas>
+
+        <script>
+          const ctx = document.getElementById('chart').getContext('2d');
+          const xlabels = {{ label }};
+          const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: xlabels,
+              datasets: [{
+                label: ['Số lượng'],
+                data: {{ data }},
+            backgroundColor: [
+              '#855CF8',
+              '#9C7AFF',
+              '#AE92FF',
+              '#BBA2FF',
+              '#C6B3FF',
+              '#D9CBFF',
+              '#E9E2FF'
+            ],
+            borderColor: [
+              '#855CF8',
+              '#9C7AFF',
+              '#AE92FF',
+              '#BBA2FF',
+              '#C6B3FF',
+              '#D9CBFF',
+              '#E9E2FF'
+            ],
+            borderWidth: 1,
+            borderRadius: 15,
+            borderSkipped: false
+          }]
+                      },
+          options: {
+            scales: {
+              y: {
+                grid: {
+                  display: false
+                }
+              },
+              x: {
+                grid: {
+                  display: false,
+                }
+              }
+            },
+            plugins: {
+              title: {
+                display: true,
+                  // text: 'Biểu đồ cảm xúc',
+                  align: 'start',
+              },
+              legend: {
+                position: 'right',
+                  display: false
+              }
+            }
+          }
+        });
+        </script>
+
       </div>
 
       <div id="right_div">
         <!-- biểu đồ phải -->
-        <h1 style="font-size:120%">Sử dụng thiết bị</h1>
-        <p id="informright">Thiết bị - kíp</p>
+        <h1 style="font-size:130%;margin-left: 10px; margin-top: 10px;">Sử dụng thiết bị</h1>
 
+        <br>
         <table style="width:100%">
           <tr>
             <th>Note</th>
             <th>Số lượng</th>
           </tr>
           <tr>
-            <td>sử dụng điện thoại</td>
-            <td>{{infor_class['useSmartPhone']}}</td>
+            <td>Sử dụng điện thoại</td>
+            <td id="useSmartPhone">{{infor_class['useSmartPhone']}}</td>
           </tr>
           <tr>
-            <td>sử dụng máy tính</td>
-            <td>{{infor_class['useLaptop']}}</td>
+            <td>Sử dụng máy tính</td>
+            <td id="useLaptop">{{infor_class['useLaptop']}}</td>
           </tr>
           <tr>
-            <td>khác</td>
-            <td>{{infor_class['other']}}</td>
+            <td>Khác</td>
+            <td id="other">{{infor_class['other']}}</td>
           </tr>
         </table>
       </div>
@@ -114,20 +177,23 @@
   </div>
 
   <div id="bar">
-    <div class="emotion selected" style="border-bottom:2px solid #2ecc71" id="e1">Cảm xúc 1</div>
-    <div class="emotion" id="e2">Cảm xúc 2</div>
-    <div class="emotion" id="e3">Cảm xúc 3</div>
-    <div class="emotion" id="e4">Cảm xúc 4</div>
-    <div class="emotion" id="e5">Cảm xúc 5</div>
-    <div class="emotion" id="e6">Cảm xúc 6</div>
-    <div class="emotion" id="e7">Cảm xúc 7</div>
+    <div class="emotion selected" style="border-bottom:2px solid #2ecc71" id="e0">Cảm xúc tức giận</div>
+    <div class="emotion" id="e1">Cảm xúc sợ hãi</div>
+    <div class="emotion" id="e2">Cảm xúc hạnh phúc</div>
+    <div class="emotion" id="e3">Cảm xúc bình thường</div>
+    <div class="emotion" id="e4">Cảm xúc buồn</div>
+    <div class="emotion" id="e5">Cảm xúc ngạc nhiên</div>
+
   </div>
 
   <div id="image">
     {% for image in listImage %}
-    <div><img src="https://i.ytimg.com/vi/tVlcKp3bWH8/maxresdefault.jpg" alt="img"></div>
+
+    <div><img src="{{image}}" alt="img"></div>
     {% endfor %}
   </div>
+
+
 
 </body>
 

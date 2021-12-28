@@ -1,0 +1,62 @@
+<canvas id="chart" max-width="600px" max-height="300px"></canvas>
+
+<script>
+    const ctx = document.getElementById('chart').getContext('2d');
+    const xlabels = {{ label }};
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: xlabels,
+            datasets: [{
+                label: ['Số lượng'],
+                data: {{ data }},
+        backgroundColor: [
+            '#855CF8',
+            '#9C7AFF',
+            '#AE92FF',
+            '#BBA2FF',
+            '#C6B3FF',
+            '#D9CBFF',
+            '#E9E2FF'
+        ],
+        borderColor: [
+            '#855CF8',
+            '#9C7AFF',
+            '#AE92FF',
+            '#BBA2FF',
+            '#C6B3FF',
+            '#D9CBFF',
+            '#E9E2FF'
+        ],
+        borderWidth: 1,
+        borderRadius: 15,
+        borderSkipped: false
+    }]
+                },
+    options: {
+        scales: {
+            y: {
+                grid: {
+                    display: false
+                }
+            },
+            x: {
+                grid: {
+                    display: false,
+                            }
+            }
+        },
+        plugins: {
+            title: {
+                display: true,
+                    // text: 'Biểu đồ cảm xúc',
+                    align: 'start',
+                        },
+            legend: {
+                position: 'right',
+                    display: false
+            }
+        }
+    }
+            });
+</script>

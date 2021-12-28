@@ -30,9 +30,13 @@ $(document).ready(function () {
 
                     let src = 'https://image.shutterstock.com/image-photo/close-portrait-smiling-handsome-man-260nw-1011569245.jpg'
                     //let ele = `<div><img src = '${image[img]}' /></div>alt="img"></div>`;
-                    let ele = `<div><img src = '${src}' /></div>`;
+                    let ele = `<div><img src = '${image[img]}' /></div>`;
                     $('#image').append(ele);
                 }
+
+                $("#useSmartPhone").text(response['6'])
+                $("#useLaptop").text(response['7'])
+                $("#other").text(response['8'])
             },
             error: function (error) {
                 $("#wait-load").modal("hide");
@@ -41,11 +45,11 @@ $(document).ready(function () {
         });
     });
 
-    $("#setstt").click(function () {
-        const template = undefined
-        $("#informleft").html("Thiết bị - kíp");
-        $("#informright").html("Thiết bị - kíp");
-    });
+    // $("#setstt").click(function () {
+    //     const template = undefined
+    //     $("#informleft").html("Thiết bị - kíp");
+    //     $("#informright").html("Thiết bị - kíp");
+    // });
 
     var now = new Date();
     var month = (now.getMonth() + 1);

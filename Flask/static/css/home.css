@@ -39,6 +39,7 @@ label {
 }
 
 #left_div{
+    justify-content: left;
     width: 70%;
     border: 1px solid #EFEFEF;
     border-radius: 9px;
