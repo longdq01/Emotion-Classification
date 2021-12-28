@@ -57,13 +57,20 @@ def home():
         query += " GROUP BY LoaiCamXuc"
 
         listEmotion = sql.select(query)
+        print(listEmotion)
 
-        label, data = [], []
+        # label, data = [], []
+        # for obj in listEmotion:
+        #     label.append(obj[0])
+        #     data.append(obj[1])
+        # print(label, data)
+        data1 = [0, 0, 0, 0, 0, 0]
+        label2 = [6, 7, 8]
         for obj in listEmotion:
-            label.append(obj[0])
-            data.append(obj[1])
+            if obj[0] not in label2:
+                data1[obj[0]] = obj[1]
+        print(data1)
 
-        print(label, data)
         # get list image of first emotion
         query = "SELECT image FROM dbo.Emotion where"
         query += " LoaiCamXuc={} and ThietBi= {} and CONVERT(DATE,Ngay)='{}' and Kip={}".format(
@@ -72,7 +79,7 @@ def home():
         listImage = sql.select(query)
 
         return render_template('home.html', listCamera=listCamera, infor_class=infor_class,
-                               label=label, data=data, listImage=listImage)
+                               data1=data1, listImage=listImage)
     else:
         return redirect(url_for('index'))
 

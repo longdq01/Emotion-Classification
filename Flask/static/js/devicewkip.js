@@ -1,8 +1,5 @@
 // tạo tên thiết bị a - Kíp b
 $(document).ready(function () {
-    var name = undefined;
-    var kip = undefined;
-
     $(".input-field").change(function () {
         cam_id = $("#device :selected").val();
         shift = $("#shift :selected").val();
@@ -23,20 +20,32 @@ $(document).ready(function () {
             type: "POST",
             data: JSON.stringify(data),
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 var image = response['image'];
                 $("#image").empty();
                 for (img in image) {
 
-                    let src = 'https://image.shutterstock.com/image-photo/close-portrait-smiling-handsome-man-260nw-1011569245.jpg'
+                    // let src = 'https://image.shutterstock.com/image-photo/close-portrait-smiling-handsome-man-260nw-1011569245.jpg'
                     //let ele = `<div><img src = '${image[img]}' /></div>alt="img"></div>`;
                     let ele = `<div><img src = '${image[img]}' /></div>`;
                     $('#image').append(ele);
                 }
 
-                $("#useSmartPhone").text(response['6'])
-                $("#useLaptop").text(response['7'])
-                $("#other").text(response['8'])
+                $("#useSmartPhone").text(response['6']);
+                $("#useLaptop").text(response['7']);
+                $("#other").text(response['8']);
+
+                data = [];
+                for (var i = 0; i < 6; i++) {
+                    if (i.toString() in response)
+                        data.push(response[i.toString()]);
+                    else
+                        data.push(0);
+                }
+                console.log(data)
+                // myChart.data = data;
+                // myChart.update();
+
             },
             error: function (error) {
                 $("#wait-load").modal("hide");
@@ -74,6 +83,46 @@ $(document).ready(function () {
         });
         $(this).addClass("selected");
         $(this).css('border-bottom', '2px solid #2ecc71')
+
+        cam_id = $("#device :selected").val();
+        shift = $("#shift :selected").val();
+        date = $("#start").val();
+        emotion = $(".selected").attr("id");
+
+        console.log(date, cam_id, shift, emotion)
+        data = {}
+        data['cameraId'] = cam_id;
+        data['shift'] = shift;
+        data['date'] = date;
+        data['emotion'] = emotion;
+
+        $.ajax({
+            url: '/info',
+            contentType: "application/json;charset=utf-8",
+            dataType: 'json',
+            type: "POST",
+            data: JSON.stringify(data),
+            success: function (response) {
+                console.log(response);
+                var image = response['image'];
+                $("#image").empty();
+                for (img in image) {
+
+                    // let src = 'https://image.shutterstock.com/image-photo/close-portrait-smiling-handsome-man-260nw-1011569245.jpg'
+                    //let ele = `<div><img src = '${image[img]}' /></div>alt="img"></div>`;
+                    let ele = `<div><img src = '${image[img]}' /></div>`;
+                    $('#image').append(ele);
+                }
+
+                $("#useSmartPhone").text(response['6'])
+                $("#useLaptop").text(response['7'])
+                $("#other").text(response['8'])
+            },
+            error: function (error) {
+                $("#wait-load").modal("hide");
+                console.log(error);
+            }
+        });
     });
 
 });

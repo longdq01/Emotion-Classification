@@ -71,7 +71,9 @@
       <div>
         <div><label for="start"><b>Chọn ngày</b></label></div>
 
-        <input type="date" id="start" name="trip-start" class="input-field">
+        <input type="date" id="start" name="trip-start" class="input-field" style="width: 100%;padding: 8px 24px 8px 24px;
+    border:2px #E5E5E5 solid;
+    border-radius: 8px;">
 
       </div>
     </form>
@@ -84,18 +86,20 @@
         <!-- biểu đồ trái-->
         <h1 style="font-size:130%;margin-left: 10px; margin-top: 10px">Biểu đồ cảm xúc</h1>
 
-        <canvas id="chart" max-width="600px" max-height="300px"></canvas>
+        <canvas id="myChart" max-width="600px" max-height="250px"
+          style="display: block; box-sizing: border-box; height: 250px !important; width: 1196px;"></canvas>
 
         <script>
-          const ctx = document.getElementById('chart').getContext('2d');
-          const xlabels = {{ label }};
-          const myChart = new Chart(ctx, {
+          var ctx = document.getElementById('myChart').getContext('2d');
+          var xlabels = ["Tức giận", "Sợ hãi", "Hạnh phúc",
+            "Bình thường", "Buồn", "Ngạc nhiên"];
+          var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
               labels: xlabels,
               datasets: [{
                 label: ['Số lượng'],
-                data: {{ data }},
+                data: {{ data1 }},
             backgroundColor: [
               '#855CF8',
               '#9C7AFF',
@@ -120,7 +124,8 @@
           }]
                       },
           options: {
-            scales: {
+            responsive: true,
+              scales: {
               y: {
                 grid: {
                   display: false
