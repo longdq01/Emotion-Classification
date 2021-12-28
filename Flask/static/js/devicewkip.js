@@ -43,8 +43,9 @@ $(document).ready(function () {
                         data.push(0);
                 }
                 console.log(data)
-                // myChart.data = data;
-                // myChart.update();
+
+                myChart.data.datasets[0].data = data;
+                myChart.update();
 
             },
             error: function (error) {
@@ -117,6 +118,7 @@ $(document).ready(function () {
                 $("#useSmartPhone").text(response['6'])
                 $("#useLaptop").text(response['7'])
                 $("#other").text(response['8'])
+
             },
             error: function (error) {
                 $("#wait-load").modal("hide");

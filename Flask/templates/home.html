@@ -90,10 +90,10 @@
           style="display: block; box-sizing: border-box; height: 250px !important; width: 1196px;"></canvas>
 
         <script>
-          var ctx = document.getElementById('myChart').getContext('2d');
-          var xlabels = ["Tức giận", "Sợ hãi", "Hạnh phúc",
+          const ctx = document.getElementById('myChart').getContext('2d');
+          const xlabels = ["Tức giận", "Sợ hãi", "Hạnh phúc",
             "Bình thường", "Buồn", "Ngạc nhiên"];
-          var myChart = new Chart(ctx, {
+          const myChart = new Chart(ctx, {
             type: 'bar',
             data: {
               labels: xlabels,
@@ -122,7 +122,7 @@
             borderRadius: 15,
             borderSkipped: false
           }]
-                      },
+            },
           options: {
             responsive: true,
               scales: {

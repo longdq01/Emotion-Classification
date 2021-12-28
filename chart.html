@@ -12,10 +12,10 @@
 
 <body>
 
-    <canvas id="chart" width="300px" height="150px"></canvas>
+    <canvas id="myChart" width="300px" height="150px"></canvas>
 
     <script>
-        const ctx = document.getElementById('chart').getContext('2d');
+        const ctx = document.getElementById('myChart').getContext('2d');
         const xlabels = ['Cảm xúc 1', 'Cảm xúc 2', 'Cảm xúc 3', 'Cảm xúc 4', 'Cảm xúc 5', 'Cảm xúc 6', 'Cảm xúc 7'];
         const myChart = new Chart(ctx, {
             type: 'bar',
@@ -73,6 +73,17 @@
                 }
             }
         });
+
+        myChart.data.datasets.forEach((dataset) => {
+            dataset.data.pop();
+        });
+        myChart.update();
+        data = [1, 2, 5, 3, 2, 4, 1]
+        myChart.data.datasets.forEach((dataset) => {
+            dataset.data.push(data);
+        });
+        myChart.update();
+
     </script>
 </body>
 
