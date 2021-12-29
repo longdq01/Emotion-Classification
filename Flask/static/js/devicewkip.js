@@ -31,6 +31,10 @@ $(document).ready(function () {
                     $('#image').append(ele);
                 }
 
+                if (response['6'] == undefined) response['6'] = 0
+                if (response['6'] == undefined) response['7'] = 0
+                if (response['6'] == undefined) response['8'] = 0
+
                 $("#useSmartPhone").text(response['6']);
                 $("#useLaptop").text(response['7']);
                 $("#other").text(response['8']);
@@ -114,6 +118,10 @@ $(document).ready(function () {
                     let ele = `<div><img src = '${image[img]}' /></div>`;
                     $('#image').append(ele);
                 }
+
+                if (response['6'] == undefined) response['6'] = 0
+                if (response['6'] == undefined) response['7'] = 0
+                if (response['6'] == undefined) response['8'] = 0
 
                 $("#useSmartPhone").text(response['6'])
                 $("#useLaptop").text(response['7'])

@@ -1,12 +1,14 @@
 from flask import Flask, redirect, url_for, render_template, session, request, flash, jsonify
-from datetime import timedelta, datetime
+from datetime import timedelta, datetime, date
 from database.User import User
 from database.sql import SQL_Server
-from flask_ngrok import run_with_ngrok
+import os
+import base64
+# from flask_ngrok import run_with_ngrok
 
 
 app = Flask(__name__)
-run_with_ngrok(app)
+# run_with_ngrok(app)
 sql = SQL_Server()
 
 app.secret_key = 'mykey'
@@ -40,16 +42,18 @@ def home():
         # get list camera
         query = 'SELECT * FROM dbo.Camera'
         listCamera = sql.select(query)
-        print(listCamera)
+
         # get infor of camera includes:  use smartphone, use laptop,  others...
         thietbi = listCamera[0][0]
-        query1 = "select COUNT(*) FROM dbo.Emotion where LoaiCamXuc =6 and Kip=1 and ThietBi ={}".format(thietbi)
-        query2 = "select COUNT(*) FROM dbo.Emotion where LoaiCamXuc =7 and Kip=1 and ThietBi ={}".format(thietbi)
-        query3 = "select COUNT(*) FROM dbo.Emotion where LoaiCamXuc =8 and Kip=1 and ThietBi ={}".format(thietbi)
+        query1 = "select COUNT(*) FROM dbo.Emotion where LoaiCamXuc =6 and Kip=1 and ThietBi ={} and CONVERT(DATE,Ngay)='{}'".format(
+            thietbi, datetime.now())
+        query2 = "select COUNT(*) FROM dbo.Emotion where LoaiCamXuc =7 and Kip=1 and ThietBi ={} and CONVERT(DATE,Ngay)='{}'".format(
+            thietbi, datetime.now())
+        query3 = "select COUNT(*) FROM dbo.Emotion where LoaiCamXuc =8 and Kip=1 and ThietBi ={} and CONVERT(DATE,Ngay)='{}'".format(
+            thietbi, datetime.now())
         infor_class = {"useSmartPhone": sql.select(
             query1)[0][0], "useLaptop": sql.select(query2)[0][0]}
         infor_class['other'] = sql.select(query3)[0][0]
-        print(infor_class)
 
         # get infor of chart (list statis about emotion)
 
@@ -61,11 +65,6 @@ def home():
         listEmotion = sql.select(query)
         print(listEmotion)
 
-        # label, data = [], []
-        # for obj in listEmotion:
-        #     label.append(obj[0])
-        #     data.append(obj[1])
-        # print(label, data)
         data1 = [0, 0, 0, 0, 0, 0]
         label2 = [6, 7, 8]
         for obj in listEmotion:
@@ -120,18 +119,44 @@ def get_emotions_with_camera():
             return jsonify({'Status': 'Failed', 'msg': str(e)})
 
 
-# @app.route('/postdata', methods=["POST"])
-# def post():
-#     if request.method == 'POST':
-#         try:
-#             data = request.get_json()
-#             id = data['id']
-#             name = data['name']
-#             print(id, name)
-#             return jsonify({'id': id, 'name': name})
-#         except Exception as e:
-#             print(e)
-#             return jsonify({'Status': 'Failed', 'msg': str(e)})
+@app.route('/post', methods=["POST"])
+def insert_data_to_db():
+    if request.method == 'POST':
+        try:
+            data = request.get_json()
+            id_cam = data['id_cam']
+            label = data['label']
+            image = data['image']  # base64 (string)
+            shift = data['shift']
+            time = datetime.now().replace(
+                hour=0, minute=0, second=0, microsecond=0)
+
+            directory = str(date.today())
+            # Parent Directory path
+            parent_dir = os.getcwd()
+            # Path
+            path = parent_dir+"\\"+"static"+"\\"+"image"+"\\"+directory
+            try:
+                os.mkdir(path)
+            except:
+                print('Folder exist!')
+
+            # Process base64 string
+            filename = image[5:20]
+            url_save_to_db = "static\\image\\"+directory+"\\"+filename+".jpg"
+            url_img = path+"\\"+filename
+            url_img += '.jpg'
+            with open(url_img, "wb") as f:
+                f.write(base64.b64decode(image.encode('utf-8')))
+
+            query = "INSERT INTO dbo.Emotion Values ('{}', '{}', '{}', '{}', '{}' )".format(url_save_to_db,
+                                                                                            label, id_cam, time, shift)
+            sql.insert(query)
+
+            return jsonify({'id_cam': id_cam, 'label': label, 'image': url_img, 'time': time, 'shift': shift})
+        except Exception as e:
+            print(e)
+            return jsonify({'Status': 'Failed', 'msg': str(e)})
 
 
 @app.route('/logout')

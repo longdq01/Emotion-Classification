@@ -1,4 +1,4 @@
-import postdata
+import requests
 import base64
 from datetime import datetime
 import json
@@ -51,14 +51,22 @@ def up_data(id_cam, img, label):
     '''
         image: str, label: int, id_cam: int, time, shift: int
     '''
-    url = ""
+    url = "http://localhost:5000/post"
     data = {"id_cam": id_cam, "label": label}
     base64img = convert_imgarr2base64(img)
-    json_data = None
     if base64img is not None:
         data["image"] = base64img
-        data["time"] = datetime.now()
         data["shift"] = to_shift(datetime.now())
-        response = postdata.post(url, json=data)
-        json_data = json.loads(response.txt)
-    return json_data
+        response = requests.post(url, json=data)
+        print("Status code: ", response.status_code)
+        print("Printing Entire Post Request")
+        print(response.json())
+
+
+def main():
+    img = cv2.imread('E:/Long/Web/testapi/123.jpg')
+    up_data(5, img, 1)
+
+
+if __name__ == '__main__':
+    main()
