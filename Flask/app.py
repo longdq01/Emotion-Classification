@@ -4,11 +4,11 @@ from database.User import User
 from database.sql import SQL_Server
 import os
 import base64
-from flask_ngrok import run_with_ngrok
+# from flask_ngrok import run_with_ngrok
 
 
 app = Flask(__name__)
-run_with_ngrok(app)
+# run_with_ngrok(app)
 sql = SQL_Server()
 
 app.secret_key = 'mykey'
@@ -176,5 +176,5 @@ def logout():
 
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port='9999')
-    app.run()
+    app.run(host='0.0.0.0', port='9999')
+    # app.run()
