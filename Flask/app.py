@@ -4,11 +4,11 @@ from database.User import User
 from database.sql import SQL_Server
 import os
 import base64
-# from flask_ngrok import run_with_ngrok
+from flask_ngrok import run_with_ngrok
 
 
 app = Flask(__name__)
-# run_with_ngrok(app)
+run_with_ngrok(app)
 sql = SQL_Server()
 
 app.secret_key = 'mykey'
@@ -125,11 +125,16 @@ def insert_data_to_db():
         try:
             data = request.get_json()
             id_cam = data['id_cam']
+            # Angry:0,Fear:1,Happy:2,Neutral:3,Sad:4:Suprise:5
             label = data['label']
             image = data['image']  # base64 (string)
             shift = data['shift']
             time = datetime.now().replace(
                 hour=0, minute=0, second=0, microsecond=0)
+
+            emotion_dictionary = {'angry': 0, 'fear': 1,
+                                  'happy': 2, 'neutral': 3, 'sad': 4, 'suprise': 5}
+            label = emotion_dictionary[label.lower()]
 
             directory = str(date.today())
             # Parent Directory path
@@ -142,7 +147,11 @@ def insert_data_to_db():
                 print('Folder exist!')
 
             # Process base64 string
-            filename = image[5:20]
+            filename = str(datetime.now())
+            specialChars = "!#$%^&*():.- "
+            for specialChar in specialChars:
+                filename = filename.replace(specialChar, '')
+
             url_save_to_db = "static\\image\\"+directory+"\\"+filename+".jpg"
             url_img = path+"\\"+filename
             url_img += '.jpg'
@@ -167,5 +176,5 @@ def logout():
 
 
 if __name__ == '__main__':
-    # app.run(host='0.0.0.0', port='9999', debug=True)
+    # app.run(host='0.0.0.0', port='9999')
     app.run()
