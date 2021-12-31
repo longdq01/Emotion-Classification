@@ -125,7 +125,7 @@ def insert_data_to_db():
         try:
             data = request.get_json()
             id_cam = data['id_cam']
-            # Angry:0,Fear:1,Happy:2,Neutral:3,Sad:4:Suprise:5
+            # Angry:0,Fear:1,Happy:2,Neutral:3,Sad:4:Surprise:5
             label = data['label']
             image = data['image']  # base64 (string)
             shift = data['shift']
@@ -133,7 +133,7 @@ def insert_data_to_db():
                 hour=0, minute=0, second=0, microsecond=0)
 
             emotion_dictionary = {'angry': 0, 'fear': 1,
-                                  'happy': 2, 'neutral': 3, 'sad': 4, 'suprise': 5}
+                                  'happy': 2, 'neutral': 3, 'sad': 4, 'surprise': 5}
             label = emotion_dictionary[label.lower()]
 
             directory = str(date.today())
